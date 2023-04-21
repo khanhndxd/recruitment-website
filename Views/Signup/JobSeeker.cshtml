@@ -1,0 +1,53 @@
+﻿@model DoanWebsiteTuyenDung.Models.JobSeeker;
+@{
+    ViewData["Title"] = "Đăng ký - Người tìm việc";
+}
+<title>@ViewData["Title"]</title>
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('../assets/images/hero_1.jpg');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Đăng ký - Người tìm việc</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Trang chủ</a> <span class="mx-2 slash">/</span>
+                    <a href="#">Người tìm việc</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Đăng ký</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section" style="padding-top:3rem; padding-bottom:3rem">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-5">
+                <form asp-action="JobSeeker" class="p-4 border rounded">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="JsName" class="control-label">Họ tên</label>
+                        <input asp-for="JsName" class="form-control" placeholder="Họ tên đầy đủ" />
+                        <span asp-validation-for="JsName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="JsEmail" class="control-label">Email</label>
+                        <input type="email" asp-for="JsEmail" class="form-control" placeholder="Địa chỉ email" />
+                        <span asp-validation-for="JsEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="JsPassword" class="control-label">Mật khẩu</label>
+                        <input type="password" asp-for="JsPassword" class="form-control" placeholder="Mật khẩu" />
+                        <span asp-validation-for="JsPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="EPassword" class="text-black">Nhập lại mật khẩu</label>
+                        <input type="password" name="ConfirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Đăng ký" class="btn px-4 btn-primary text-white" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
