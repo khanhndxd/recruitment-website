@@ -39,7 +39,6 @@ namespace DoanWebsiteTuyenDung.Controllers
             {
                 Id = lastRecord.EId;
             }
-
             int nextId;
             string currentId = String.Join("", Id.Where(char.IsDigit));
             if (currentId == "")
