@@ -88,6 +88,7 @@ namespace DoanWebsiteTuyenDung.Controllers
             {
                 Id = lastRecord.JsId;
             }
+
             int nextId;
             string currentId = String.Join("", Id.Where(char.IsDigit));
             if(currentId == "")
