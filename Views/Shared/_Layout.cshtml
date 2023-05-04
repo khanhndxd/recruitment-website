@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/assets/css/style.css">
+    <!--CUSTOM STYLE-->
+    <link rel="stylesheet" href="~/assets/css/custom_style.css" />
 </head>
 <body id="top">
     <partial name="_Notification" />
@@ -53,12 +55,12 @@
 
                     <nav class="mx-auto site-navigation">
                         <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-                            <li><a asp-action="Index" asp-area="" asp-controller="Home" class="nav-link active">Trang chủ</a></li>
-                            <li><a href="#">Công việc</a></li>
+                            <li><a asp-action="Index" asp-area="" asp-controller="Home" class="nav-link active text-black">Trang chủ</a></li>
+                            <li><a href="#" class="text-black">Công việc</a></li>
                             @if (username != null) {
-                                <li><a href="#">Quản lý</a></li>
+                                <li><a class="text-black" asp-controller="Home" asp-action="Dashboard" asp-route-username="@username">Quản lý</a></li>
                             }
-                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#" class="text-black">Liên hệ</a></li>
                         </ul>
                     </nav>
 
@@ -69,7 +71,7 @@
                                 <nav class=" site-navigation" style="margin-left: 23%;margin-top: -1.5%;">
                                     <ul class="site-menu js-clone-nav d-none d-xl-block ">
                                         <li class="has-children">
-                                                <div style="padding: 6px !important;" class="btn btn-primary border-width-2 d-none d-lg-inline-block"> <span class="mr-2 icon-lock_outline"></span>Đăng nhập</div>
+                                            <div id="my-btn" style="padding: 6px !important;" class="btn border-width-2 d-none d-lg-inline-block"> <span class="mr-2 icon-lock_outline"></span>Đăng nhập</div>
                                                 <ul class="dropdown">
                                                     <li><a asp-action="JobSeeker" asp-area="" asp-controller="Signin">Người tìm việc</a></li>
                                                     <li><a asp-action="Employer" asp-area="" asp-controller="Signin">Nhà tuyển dụng</a></li>
@@ -80,7 +82,7 @@
                                 <nav class=" site-navigation" style="margin-left: 35%;margin-top: -1.5%;">
                                     <ul class="site-menu js-clone-nav d-none d-xl-block ">
                                         <li class="has-children">
-                                            <div style="padding: 6px !important;" class="btn btn-primary border-width-2 d-none d-lg-inline-block"> <span class="mr-2 icon-lock_outline"></span>Đăng ký</div>
+                                            <div id="my-btn" style="padding: 6px !important;" class="btn border-width-2 d-none d-lg-inline-block"> <span class="mr-2 icon-lock_outline"></span>Đăng ký</div>
                                             <ul class="dropdown">
                                                 <li><a asp-action="JobSeeker" asp-area="" asp-controller="Signup">Người tìm việc</a></li>
                                                 <li><a asp-action="Employer" asp-area="" asp-controller="Signup">Nhà tuyển dụng</a></li>
