@@ -23,6 +23,13 @@ namespace DoanWebsiteTuyenDung.Controllers
             return View();
         }
 
+        [Route("{username}/dashboard")]
+        public IActionResult Dashboard(string username)
+        {
+			ViewData["username"] = username;
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
