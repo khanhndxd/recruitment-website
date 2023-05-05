@@ -23,6 +23,19 @@ namespace DoanWebsiteTuyenDung.Controllers
             return View();
         }
 
+        public IActionResult PostJob()
+        {
+            string usertype = HttpContext.Session.GetString("usertype");
+            if(usertype == "emp")
+            {
+                return View();
+            } else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+
         [Route("{username}/dashboard")]
         public IActionResult Dashboard(string username)
         {
