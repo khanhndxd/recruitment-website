@@ -30,7 +30,8 @@ namespace DoanWebsiteTuyenDung.Controllers
             {
                 _contextAccessor.HttpContext.Session.SetString("username", e.EName);
                 _contextAccessor.HttpContext.Session.SetString("email", e.EEmail);
-				TempData["success"] = "Đăng nhập thành công";
+                _contextAccessor.HttpContext.Session.SetString("usertype", "emp");
+                TempData["success"] = "Đăng nhập thành công";
 				return RedirectToAction("Index", "Home");
             }
 			TempData["error"] = "Đăng nhập không thành công";
@@ -49,7 +50,8 @@ namespace DoanWebsiteTuyenDung.Controllers
             {
 				_contextAccessor.HttpContext.Session.SetString("username", e.JsName);
 				_contextAccessor.HttpContext.Session.SetString("email", e.JsName);
-				TempData["success"] = "Đăng nhập thành công";
+                _contextAccessor.HttpContext.Session.SetString("usertype", "jsk");
+                TempData["success"] = "Đăng nhập thành công";
 				return RedirectToAction("Index", "Home");
             }
 			TempData["error"] = "Đăng nhập không thành công";
