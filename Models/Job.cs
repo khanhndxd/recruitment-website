@@ -20,7 +20,6 @@ public partial class Job
     public string JTitle { get; set; } = null!;
 
     [Column("J_description")]
-    [StringLength(100)]
     public string JDescription { get; set; } = null!;
 
     [Column("J_requiredSkills")]
@@ -38,6 +37,14 @@ public partial class Job
 
     [Column("J_status")]
     public int JStatus { get; set; }
+
+    [Column("J_Location")]
+    [StringLength(100)]
+    public string? JLocation { get; set; }
+
+    [Column("J_Type")]
+    [StringLength(10)]
+    public string? JType { get; set; }
 
     [Column("E_id")]
     [StringLength(30)]

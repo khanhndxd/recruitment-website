@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -18,19 +17,16 @@ public partial class Employer
 
     [Column("E_name")]
     [StringLength(30)]
-    [DisplayName("Tên nhà tuyển dụng")]
     public string EName { get; set; } = null!;
 
     [Column("E_email")]
     [StringLength(30)]
-	[DisplayName("Email")]
-	public string EEmail { get; set; } = null!;
+    public string EEmail { get; set; } = null!;
 
     [Column("E_password")]
     [StringLength(30)]
     [Unicode(false)]
-	[DisplayName("Mật khẩu")]
-	public string EPassword { get; set; } = null!;
+    public string EPassword { get; set; } = null!;
 
     [Column("E_contactPerson")]
     [StringLength(30)]
@@ -48,6 +44,10 @@ public partial class Employer
     [Column("E_about")]
     [StringLength(100)]
     public string? EAbout { get; set; }
+
+    [Column("E_Image")]
+    [StringLength(100)]
+    public string? EImage { get; set; }
 
     [InverseProperty("EIdNavigation")]
     public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();

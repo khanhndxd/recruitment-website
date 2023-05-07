@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -18,20 +17,17 @@ public partial class JobSeeker
 
     [Column("JS_name")]
     [StringLength(30)]
-	[DisplayName("Họ tên")]
-	public string JsName { get; set; } = null!;
+    public string JsName { get; set; } = null!;
 
     [Column("JS_email")]
     [StringLength(30)]
     [Unicode(false)]
-	[DisplayName("Email")]
-	public string JsEmail { get; set; } = null!;
+    public string JsEmail { get; set; } = null!;
 
     [Column("JS_password")]
     [StringLength(30)]
     [Unicode(false)]
-	[DisplayName("Mật khẩu")]
-	public string JsPassword { get; set; } = null!;
+    public string JsPassword { get; set; } = null!;
 
     [Column("JS_phone")]
     [StringLength(11)]
