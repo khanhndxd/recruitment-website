@@ -34,7 +34,7 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
     {
         modelBuilder.Entity<Application>(entity =>
         {
-            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D9DCF9FD6A");
+            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D943124C53");
 
             entity.Property(e => e.AAppliedDate).HasDefaultValueSql("(getdate())");
 
@@ -45,12 +45,12 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
         modelBuilder.Entity<Employer>(entity =>
         {
-            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DACDFA0DF99");
+            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DACAC59CF95");
         });
 
         modelBuilder.Entity<Job>(entity =>
         {
-            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2AB3B28D0DA");
+            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2AB1099597F");
 
             entity.Property(e => e.JPostDate).HasDefaultValueSql("(getdate())");
 
@@ -87,7 +87,7 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
                         .HasConstraintName("FK_Intermediate"),
                     j =>
                     {
-                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC94391C56");
+                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC6E5C3F70");
                         j.ToTable("Intermediate_table");
                         j.IndexerProperty<string>("RId")
                             .HasMaxLength(30)

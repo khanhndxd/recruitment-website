@@ -46,7 +46,6 @@ public partial class Employer
     public string? EAbout { get; set; }
 
     [Column("E_Image")]
-    [StringLength(100)]
     public string? EImage { get; set; }
 
     [InverseProperty("EIdNavigation")]

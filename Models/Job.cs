@@ -23,11 +23,10 @@ public partial class Job
     public string JDescription { get; set; } = null!;
 
     [Column("J_requiredSkills")]
-    [StringLength(50)]
     public string JRequiredSkills { get; set; } = null!;
 
     [Column("J_salary", TypeName = "money")]
-    public decimal? JSalary { get; set; }
+    public decimal JSalary { get; set; }
 
     [Column("J_postDate", TypeName = "date")]
     public DateTime JPostDate { get; set; }
@@ -36,7 +35,7 @@ public partial class Job
     public DateTime JExpirationDate { get; set; }
 
     [Column("J_status")]
-    public int JStatus { get; set; }
+    public int? JStatus { get; set; }
 
     [Column("J_Location")]
     [StringLength(100)]
@@ -44,7 +43,7 @@ public partial class Job
 
     [Column("J_Type")]
     [StringLength(10)]
-    public string? JType { get; set; }
+    public string JType { get; set; } = null!;
 
     [Column("E_id")]
     [StringLength(30)]
