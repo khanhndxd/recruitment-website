@@ -574,7 +574,7 @@ h1, h2, h3, h4 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(137, 186, 22, 0.9);
+      background-color: #F0F8FF;
       z-index: 1; }
     .bg-image.overlay-primary > .container {
       position: relative;
@@ -588,7 +588,7 @@ h1, h2, h3, h4 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(137, 186, 22, 0.9);
+      background: #F0F8FF;
       z-index: 1; }
     .bg-image.overlay-blue > .container {
       position: relative;
@@ -704,7 +704,7 @@ h1, h2, h3, h4 {
 .job-listings {
   padding: 0;
   margin: 0;
-  border: 1px solid #eee;
+  /*border: 1px solid #eee;*/
   border-radius: 7px;
   overflow: hidden;
   position: relative;
@@ -717,12 +717,14 @@ h1, h2, h3, h4 {
       width: 100% !important; } }
   .job-listings .job-listing {
     position: relative;
-    border-bottom: 1px solid #eee;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid #eee;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease; }
     .job-listings .job-listing:last-child {
-      border-bottom: none; }
+      /*border-bottom: none;*/ }
     .job-listings .job-listing a {
       position: absolute;
       width: 100%;
@@ -731,11 +733,11 @@ h1, h2, h3, h4 {
       -o-transition: .3s all ease;
       transition: .3s all ease; }
       .job-listings .job-listing a:hover {
-        border-left: 7px solid #89ba16; }
+        border-left: 7px solid #1E90FF; }
     .job-listings .job-listing .job-listing-logo {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 150px;
-      flex: 0 0 150px;
+      -ms-flex: 0 0 200px;
+      flex: 0 0 200px;
       border-right: 1px solid #eee; }
       @media (max-width: 575.98px) {
         .job-listings .job-listing .job-listing-logo {
@@ -930,10 +932,10 @@ h1, h2, h3, h4 {
     color: #000; }
 
 .btn.btn-outline-primary {
-  color: #89ba16; }
+  color: #1E90FF; }
   .btn.btn-outline-primary:hover {
     color: #fff;
-    background: #89ba16; }
+    background: #1E90FF; }
 
 .custom-pagination a {
   width: 30px;
@@ -1349,7 +1351,7 @@ h1, h2, h3, h4 {
   width: 40px;
   height: 40px;
   position: relative;
-  background: #89ba16;
+  background: #1E90FF;
   border-radius: 50%;
   text-decoration: none !important; }
   .footer-social a > span, .social a > span {
@@ -1363,7 +1365,7 @@ h1, h2, h3, h4 {
   .footer-social a:hover, .social a:hover {
     background: #fff; }
     .footer-social a:hover span, .social a:hover span {
-      color: #89ba16; }
+      color: black; }
 
 .social a:hover {
   background: #343a40; }
