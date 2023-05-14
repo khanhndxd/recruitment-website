@@ -46,7 +46,7 @@ namespace DoanWebsiteTuyenDung.Controllers
 
         public IActionResult PostJob()
         {
-            string usertype = HttpContext.Session.GetString("usertype");
+            string usertype = _contextAccessor.HttpContext.Session.GetString("usertype");
             if(usertype == "emp")
             {
                 return View();
@@ -97,6 +97,7 @@ namespace DoanWebsiteTuyenDung.Controllers
             job.JDescription = description;
             job.JRequiredSkills = required;
             job.EId = _contextAccessor.HttpContext.Session.GetString("userId");
+            job.JStatus = 0;
             DateTime J_expirationDate = DateTime.Now.AddDays(so_ngay_het_han);
             job.JExpirationDate = J_expirationDate;
 
@@ -104,14 +105,6 @@ namespace DoanWebsiteTuyenDung.Controllers
             TempData["success"] = "Đăng tải công việc thành công";
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
-        }
-
-
-        [Route("{username}/dashboard")]
-        public IActionResult Dashboard(string username)
-        {
-			ViewData["username"] = username;
-            return View();
         }
 
         [HttpGet]
@@ -127,6 +120,78 @@ namespace DoanWebsiteTuyenDung.Controllers
                 return NotFound();
             }
             return View(job);
+        }
+
+        [HttpGet]
+        [Route("{userid}/apply/{jobid}")]
+        public async Task<IActionResult> ApplyJob([FromRoute] string jobid)
+        {
+            var userid = _contextAccessor.HttpContext.Session.GetString("userId");
+            ViewData["jobid"] = jobid;
+            var resume = _context.Resumes.Include(r => r.Js).Where(r => r.Js.JsId == userid).ToList();
+            if(resume != null)
+            {
+                return View(resume);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{userid}/apply/{jobid}")]
+        public async Task<IActionResult> ApplyJob([FromRoute] string userid, [FromRoute] string jobid, [FromForm] string resume)
+        {
+            
+            var jsk = await _context.JobSeekers.FindAsync(userid);
+            var job = await _context.Jobs.FindAsync(jobid);
+            var selectionResume = await _context.Resumes.FindAsync(resume);
+            if(selectionResume == null)
+            {
+                TempData["error"] = "Không thể tìm thấy hồ sơ";
+                return RedirectToAction("Index", "Home");
+            }
+            if (jsk != null && job != null)
+            {
+				string Id;
+				var lastRecord = await _context.Applications.OrderByDescending(a => a.AId).FirstOrDefaultAsync();
+				if (lastRecord == null)
+				{
+					Id = "";
+				}
+				else
+				{
+					Id = lastRecord.AId;
+				}
+				int nextId;
+				string currentId = String.Join("", Id.Where(char.IsDigit));
+				if (currentId == "")
+				{
+					nextId = 1;
+				}
+				else
+				{
+					nextId = Int32.Parse(currentId) + 1;
+				}
+				string newId;
+				if (nextId <= 9)
+				{
+					newId = "appl0" + nextId.ToString();
+				}
+				else
+				{
+					newId = "appl" + nextId.ToString();
+				}
+				var application = new Application { JId = job.JId, AStatus = 0 };
+				application.AId = newId;
+                application.RIds.Add(selectionResume);
+                job.JStatus = 1;
+				TempData["success"] = "Apply công việc thành công";
+
+				await _context.Applications.AddAsync(application);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            return NotFound();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
