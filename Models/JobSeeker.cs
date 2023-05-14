@@ -45,6 +45,9 @@ public partial class JobSeeker
     [Column("JS_expectedSalary", TypeName = "money")]
     public decimal? JsExpectedSalary { get; set; }
 
+    [Column("JS_image")]
+    public string? JsImage { get; set; }
+
     [InverseProperty("Js")]
     public virtual ICollection<Resume> Resumes { get; set; } = new List<Resume>();
 }

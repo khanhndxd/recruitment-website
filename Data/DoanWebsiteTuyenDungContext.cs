@@ -28,13 +28,13 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=NGUYENDUYKHANH1\\SQLEXPRESS;Initial Catalog=Doan_WebsiteTuyenDung;Trusted_Connection=yes;TrustServerCertificate=True;User ID=khanhnd;password=khanh123");
+        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-OR9L1H31\\SQLEXPRESS;Initial Catalog=Doan_WebsiteTuyenDung;Trusted_Connection=yes;TrustServerCertificate=True;User ID=sa;password=123456789");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Application>(entity =>
         {
-            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D943124C53");
+            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D919CA2FD7");
 
             entity.Property(e => e.AAppliedDate).HasDefaultValueSql("(getdate())");
 
@@ -45,12 +45,12 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
         modelBuilder.Entity<Employer>(entity =>
         {
-            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DACAC59CF95");
+            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DACEF585164");
         });
 
         modelBuilder.Entity<Job>(entity =>
         {
-            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2AB1099597F");
+            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2AB0E6B9197");
 
             entity.Property(e => e.JPostDate).HasDefaultValueSql("(getdate())");
 
@@ -61,12 +61,12 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
         modelBuilder.Entity<JobSeeker>(entity =>
         {
-            entity.HasKey(e => e.JsId).HasName("PK__Job_Seek__D295F845E9B534C3");
+            entity.HasKey(e => e.JsId).HasName("PK__Job_Seek__D295F845EE865888");
         });
 
         modelBuilder.Entity<Resume>(entity =>
         {
-            entity.HasKey(e => e.RId).HasName("PK__Resume__DE142AC1DA77BB7A");
+            entity.HasKey(e => e.RId).HasName("PK__Resume__DE142AC1248DAE63");
 
             entity.Property(e => e.RUpdateDate).HasDefaultValueSql("(getdate())");
 
@@ -87,7 +87,7 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
                         .HasConstraintName("FK_Intermediate"),
                     j =>
                     {
-                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC6E5C3F70");
+                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC452DF8AD");
                         j.ToTable("Intermediate_table");
                         j.IndexerProperty<string>("RId")
                             .HasMaxLength(30)
