@@ -1,0 +1,42 @@
+﻿@model DoanWebsiteTuyenDung.Models.Resume
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string username = HttpContextAccessor.HttpContext.Session.GetString("username");
+    string usertype = HttpContextAccessor.HttpContext.Session.GetString("usertype");
+    string userId = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+    Layout = "_JobDetailLayout.cshtml";
+}
+<section class="site-section">
+    <div class="container">
+        <section class="site-section">
+            <div class="container">
+                <div class="row align-items-center mb-5">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <div class="border p-2 d-inline-block mr-3 rounded" style="width:100px; height:100px">
+                                <img src=@Model.Js.JsImage alt="jsk-logo" width="100%" height="100%">
+                            </div>
+                            <div>
+                                <h2>@Model.RName</h2>
+                                <div>
+                                    <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span>@Model.Js.JsName</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="mb-5">
+                            <h3 class="h5 d-flex align-items-center mb-4 text-primary"><span class="icon-rocket mr-3"></span>Thông tin</h3>
+                            @Html.Raw(Model.RContent)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
