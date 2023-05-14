@@ -1,0 +1,78 @@
+﻿@model DoanWebsiteTuyenDung.Models.JobSeeker
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+	Layout = "_DashboardLayout.cshtml";
+}
+<div class="main-content">
+    <div class="page-header no-gutters mb-3">
+        <div class="row align-items-md-center">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="m-l-5" id="header-text">Thông tin tài khoản</span>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-6">
+                <div class="text-md-right m-v-10">
+                    <a class="btn btn-primary">
+                        <span class="m-l-5 text-white">Cập nhật</span>
+                    </a>
+                </div>
+            </div>*@
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form id="update" asp-controller="JobSeekerDashboard" asp-action="UpdateJobSeekerInfo" asp-route-userid="@userid" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="JsName">Tên</label>
+                    <input asp-for="JsName" type="text" class="form-control" placeholder="@Model.JsName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="JsEmail">Email</label>
+                    <input asp-for="JsEmail" type="text" class="form-control" placeholder="@Model.JsEmail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="JsPhone">Số điện thoại</label>
+                <input asp-for="JsPhone" type="text" class="form-control" placeholder="@Model.JsPhone">
+            </div>
+            <div class="form-group">
+                <label asp-for="JsImage">Link ảnh</label>
+                <input asp-for="JsImage" type="text" class="form-control" placeholder="@Model.JsImage">
+            </div>
+            <div class="form-group">
+                <label asp-for="JsAddress">Địa chỉ</label>
+                <input asp-for="JsAddress" type="text" class="form-control" placeholder="@Model.JsAddress">
+            </div>
+            <div class="form-group">
+                <label asp-for="JsSkills">Kỹ năng</label>
+                <div id="quillEditor"></div>
+                <input type="hidden" name="quillContent" id="quillContent">
+            </div>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+	    </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/assets/js/quill.min.js"></script>
+    <script type="text/javascript">
+        var quill = new Quill('#quillEditor', {
+            theme: 'snow'
+        });
+
+        var htmlContent = "@Html.Raw(Model.JsSkills)"; // Lấy nội dung HTML từ model
+        quill.clipboard.dangerouslyPasteHTML(htmlContent);
+
+        document.querySelector('form').addEventListener('submit', function (event) {
+            var quillContent = quill.root.innerHTML;
+            document.querySelector('#quillContent').value = quillContent;
+        });
+    </script>
+}
