@@ -39,11 +39,13 @@ public partial class JobSeeker
     public string? JsAddress { get; set; }
 
     [Column("JS_skills")]
-    [StringLength(100)]
     public string? JsSkills { get; set; }
 
     [Column("JS_expectedSalary", TypeName = "money")]
     public decimal? JsExpectedSalary { get; set; }
+
+    [Column("JS_image")]
+    public string? JsImage { get; set; }
 
     [InverseProperty("Js")]
     public virtual ICollection<Resume> Resumes { get; set; } = new List<Resume>();

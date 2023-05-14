@@ -42,10 +42,9 @@ public partial class Employer
     public string? EAddress { get; set; }
 
     [Column("E_about")]
-    [StringLength(100)]
     public string? EAbout { get; set; }
 
-    [Column("E_Image")]
+    [Column("E_image")]
     public string? EImage { get; set; }
 
     [InverseProperty("EIdNavigation")]
