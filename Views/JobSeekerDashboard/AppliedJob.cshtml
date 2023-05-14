@@ -1,0 +1,54 @@
+﻿@model List<Job>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+    Layout = "_DashboardLayout.cshtml";
+}
+<div class="main-content">
+    <div class="container-fluid">
+        <div id="card-view">
+            <div class="row">
+                @foreach (var job in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+
+                                    <div class="media">
+                                        <div class="m-l-10">
+                                            <h5 class="m-b-0">@job.JTitle</h5>
+                                            <span class="text-muted font-size-13">Ngày đăng: @job.JPostDate</span>
+                                            <span class="text-muted font-size-13">Ngày hết hạn: @job.JExpirationDate</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown dropdown-animated scale-left">
+                                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                                            <i class="anticon anticon-ellipsis"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="GetJobDetail" asp-route-jobId=@job.JId>
+                                                <i class="anticon anticon-eye"></i>
+                                                <span class="m-l-10">Xem chi tiết</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-t-20">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <span class="badge badge-pill badge-cyan">Đã nộp hồ sơ</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
