@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+	string username = HttpContextAccessor.HttpContext.Session.GetString("username");
+	string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="~/assets/css/custom_style.css" />
+		<link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/assetsAdmin/css/app.min.css">
+		<link rel="stylesheet" href="~/assets/css/quill.snow.css">
+
+	</head>
+	<body id="my-body">
+	<partial name="_Notification" />
+		<div id="dashboard-header">
+			<div id="dashboard-header-logo">
+				<div class="site-logo"><a asp-action="Index" asp-controller="Home" asp-area=""><span class="text-black" id="dashboard-logo">Khanh-Phu-Dai</span></a></div>
+			</div>
+		</div>
+		<div id="dashboard-side-nav">
+
+			<div class="side-nav">
+				<div class="side-nav-inner">
+					<ul class="side-nav-menu scrollable">
+						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
+						<a asp-controller="EmployerDashboard" asp-action="Index" asp-route-userid="@userid" id="dashboard-link">
+								<span class="icon-holder">
+									<i class="anticon anticon-form"></i>
+								</span>
+								<span class="title">
+									Trang chủ
+								</span>
+							</a>
+						</li>
+						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
+						<a asp-controller="EmployerDashboard" asp-action="Jobs" asp-route-userid="@userid" id="dashboard-link">
+								<span class="icon-holder">
+									<i class="anticon anticon-appstore"></i>
+								</span>
+								<span class="title">
+									Danh sách tin tuyển dụng
+								</span>
+							</a>
+						</li>
+						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
+						<a asp-controller="EmployerDashboard" asp-action="UpdateEmployerInfo" asp-route-userid="@userid" id="dashboard-link">
+								<span class="icon-holder">
+									<i class="anticon anticon-dashboard"></i>
+								</span>
+								<span class="title">
+									Cập nhật thông tin
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>	
+
+		</div>
+		<div id="dashboard-content-container">
+			<div id="dashboard-content-main">@RenderBody()</div>
+		</div>
+	</body>
+	<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="~/assetsAdmin/js/pages/project-list.js"></script>
+	<script src="~/assetsAdmin/js/app.min.js"></script>
+	<script src="~/assetsAdmin/js/vendors.min.js"></script>
+	<script src="~/assets/js/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</html>
