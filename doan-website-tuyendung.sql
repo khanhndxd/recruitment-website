@@ -8,7 +8,7 @@ create table Job_Seeker(
 	JS_password varchar(30) not null,
 	JS_phone varchar(11),
 	JS_address nvarchar(100),
-	JS_skills nvarchar(100),
+	JS_skills nvarchar(MAX),
 	JS_expectedSalary money,
 	JS_image nvarchar(MAX)
 )
@@ -21,7 +21,7 @@ create table Employer(
 	E_contactPerson nvarchar(30),
 	E_phone varchar(11),
 	E_address nvarchar(100),
-	E_about nvarchar(100),
+	E_about nvarchar(MAX),
 	E_image nvarchar(MAX)
 )
 
@@ -41,14 +41,6 @@ create table Job(
 			FOREIGN KEY (E_id) REFERENCES Employer(E_id)
 )
 
-drop table Employer
-drop table Job_Seeker
-drop table Resume
-
-drop table Job
-drop table Application
-drop table Intermediate_table
-
 create table Application(
 	A_id varchar(30) primary key not null,
 	A_appliedDate date default(GETDATE()) not null,
@@ -62,7 +54,7 @@ create table Resume(
 	R_id varchar(30) primary key not null,
 	R_name nvarchar(30) not null,
 	R_updateDate date default(GETDATE()) not null,
-	R_content nvarchar(100) not null,
+	R_content nvarchar(MAX) not null,
 	JS_id varchar(30) not null 
 	CONSTRAINT FK_Resume 
 			FOREIGN KEY (JS_id) REFERENCES Job_Seeker(JS_id)
@@ -77,3 +69,11 @@ create table Intermediate_table(
 	CONSTRAINT FK_Intermediate1 
 			FOREIGN KEY (A_id) REFERENCES Application(A_id),
 )
+
+drop table Employer
+drop table Job_Seeker
+drop table Resume
+
+drop table Job
+drop table Application
+drop table Intermediate_table
