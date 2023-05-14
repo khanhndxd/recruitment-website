@@ -3,6 +3,7 @@
 @{
     string username = HttpContextAccessor.HttpContext.Session.GetString("username");
     string usertype = HttpContextAccessor.HttpContext.Session.GetString("usertype");
+    string userId = HttpContextAccessor.HttpContext.Session.GetString("userId");
 }
 <!doctype html>
 <html lang="en">
@@ -26,7 +27,15 @@
                             <li><a href="#" class="text-black">Công việc</a></li>
                             @if (username != null)
                             {
-                                <li><a class="text-black" asp-controller="Home" asp-action="Dashboard" asp-route-username="@username">Quản lý</a></li>
+                                if (usertype == "emp")
+                                {
+                                    <li><a class="text-black" asp-controller="EmployerDashboard" asp-action="Index" asp-route-userid="@userId">Quản lý</a></li>
+                                }
+                                else if (usertype == "jsk")
+                                {
+                                    <li><a class="text-black" asp-controller="JobSeekerDashboard" asp-action="Index" asp-route-userid="@userId">Quản lý</a></li>
+                                }
+
                             }
                             <li><a href="#" class="text-black">Liên hệ</a></li>
                         </ul>

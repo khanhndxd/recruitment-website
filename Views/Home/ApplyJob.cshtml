@@ -1,0 +1,25 @@
+﻿@model List<Resume>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+    Layout = "_BlankLayout.cshtml";
+}
+<form class="custom-model" asp-controller="Home" asp-action="ApplyJob" asp-route-userid="@userid" asp-route-jobId="@ViewData["jobid"]" method="post">
+    <h3 class="text-white border-bottom pb-2">Chọn hồ sơ để apply vào công việc</h3>
+    <div class="form-group">
+        <label for="resume">Hồ sơ</label>
+        <select id="resume" name="resume" class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn hồ sơ...">
+            @foreach(var re in Model)
+            {
+                <option value="@re.RId">@re.RName</option>
+            }
+        </select>
+    </div>
+    <div class="custom-model-button-container">
+        <button asp-controller="Home" asp-action="Index" asp-route-userid="@userid" class="btn btn-primary ml-auto mr-2">Hủy</button>
+        <button type="submit" class="btn btn-primary">Xác nhận</button>
+    </div>
+</form>
