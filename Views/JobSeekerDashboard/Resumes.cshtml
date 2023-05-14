@@ -1,0 +1,66 @@
+﻿@model List<Resume>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+	Layout = "_DashboardLayout.cshtml";
+}
+<div class="main-content">
+    <div class="page-header no-gutters mb-3">
+        <div class="row align-items-md-center">
+            <div class="col-md-6">
+                <div class="text-md-right m-v-10">
+                    <a class="btn btn-primary" asp-controller="JobSeekerDashboard" asp-action="CreateResume" asp-route-userid="@userid">
+                        <i class="anticon anticon-plus"></i>
+                        <span class="m-l-5">Tạo hồ sơ mới</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="card-view">
+            <div class="row">
+                @foreach (var re in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+
+                                    <div class="media">
+                                        <div class="m-l-10">
+                                            <h5 class="m-b-0">@re.RName</h5>
+                                            <span class="text-muted font-size-13">Cập nhật ngày: @re.RUpdateDate</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown dropdown-animated scale-left">
+                                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                                            <i class="anticon anticon-ellipsis"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" asp-controller="JobSeekerDashboard" asp-action="GetResumeDetail" asp-route-userid="@userid" asp-route-reId=@re.RId>
+                                                <i class="anticon anticon-eye"></i>
+                                                <span class="m-l-10">Xem chi tiết</span>
+                                            </a>
+                                            <a class="dropdown-item" asp-controller="JobSeekerDashboard" asp-action="EditResume" asp-route-userid="@userid" asp-route-reId=@re.RId>
+                                                <i class="anticon anticon-edit"></i>
+                                                <span class="m-l-10">Sửa</span>
+                                            </a>
+                                            <a class="dropdown-item" asp-controller="JobSeekerDashboard" asp-action="DeleteResume" asp-route-userid="@userid" asp-route-reId=@re.RId>
+                                                <i class="anticon anticon-delete"></i>
+                                                <span class="m-l-10">Xóa</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

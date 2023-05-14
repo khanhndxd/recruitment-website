@@ -1,0 +1,122 @@
+﻿@model List<Job>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+	Layout = "_DashboardLayout.cshtml";
+}
+<div class="main-content">
+    <div class="page-header no-gutters mb-3">
+        <div class="row align-items-md-center">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input type="text" class="form-control" placeholder="Tên công việc...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="text-md-right m-v-10">
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="PostJob">
+                        <i class="anticon anticon-plus"></i>
+                        <span class="m-l-5">Đăng tin tuyển dụng</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="card-view">
+            <div class="row">
+                @foreach (var job in Model)
+                {
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+
+                                    <div class="media">
+                                        <div class="m-l-10">
+                                            <h5 class="m-b-0">@job.JTitle</h5>
+                                            <span class="text-muted font-size-13">Ngày đăng: @job.JPostDate</span>
+                                            <span class="text-muted font-size-13">Ngày hết hạn: @job.JExpirationDate</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown dropdown-animated scale-left">
+                                        <a class="text-gray font-size-18" href="javascript:void(0);" data-toggle="dropdown">
+                                            <i class="anticon anticon-ellipsis"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" asp-controller="Home" asp-action="GetJobDetail" asp-route-jobId=@job.JId>
+                                                <i class="anticon anticon-eye"></i>
+                                                <span class="m-l-10">Xem chi tiết</span>
+                                            </a>
+                                            <a class="dropdown-item" asp-controller="EmployerDashboard" asp-action="EditJob" asp-route-userid="@userid" asp-route-jobId=@job.JId>
+                                                <i class="anticon anticon-edit"></i>
+                                                <span class="m-l-10">Sửa</span>
+                                            </a>
+                                            <a class="dropdown-item" asp-controller="EmployerDashboard" asp-action="DeleteJob" asp-route-userid="@userid" asp-route-jobId=@job.JId>
+                                                <i class="anticon anticon-delete"></i>
+                                                <span class="m-l-10">Xóa</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-t-20">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            @if(job.JStatus == 0)
+                                            {
+                                                <span class="badge badge-pill badge-red">Chưa có hồ sơ</span>
+                                            } else
+                                            {
+                                                <span class="badge badge-pill badge-cyan">Đã có hồ sơ</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <form asp-controller="EmployerDashboard" asp-action="Jobs" asp-route-userid="@userid" method="post">
+        <input type="hidden" id="jobId" name="jobId" value="" />
+        <div class="modal fade" id="delete-job">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận xóa công việc</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <i class="anticon anticon-close"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Xóa công việc
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+        var modal = document.querySelector('#delete-job');
+        var input = document.querySelector('#jobId');
+        modal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var jobId = button.getAttribute('data-id');
+            var input = document.querySelector('#jobId');
+            input.value = jobId;
+        });
+</script>
