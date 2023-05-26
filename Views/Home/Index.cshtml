@@ -65,8 +65,8 @@
             {
                 <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center mb-3">
                     <a asp-controller="Home" asp-action="GetJobDetail" asp-route-jobId=@job.JId></a>
-                    <div class="job-listing-logo">
-                        <img src=@job.EIdNavigation.EImage alt="company-logo" class="img-fluid">
+                    <div class="p-3 job-listing-logo">
+                        <img src=@job.EIdNavigation.EImage alt="company-logo" class="img-fluid" style="width:100%; height:100%; object-fit:contain">
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
@@ -94,24 +94,6 @@
                 </li>
             }
         </ul>
-
-        @*<div class="row pagination-wrap">
-            <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
-                <span>Showing 1-7 Of 43,167 Jobs</span>
-            </div>
-            <div class="col-md-6 text-center text-md-right">
-                <div class="custom-pagination ml-auto">
-                    <a href="#" class="prev">Prev</a>
-                    <div class="d-inline-block">
-                        <a href="#" class="active">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                    </div>
-                    <a href="#" class="next">Next</a>
-                </div>
-            </div>
-        </div>*@
 
     </div>
 </section>

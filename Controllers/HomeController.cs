@@ -123,6 +123,14 @@ namespace DoanWebsiteTuyenDung.Controllers
         }
 
         [HttpGet]
+        [Route("employer/{eId}/detail")]
+        public async Task<IActionResult> EmployerDetail([FromRoute] string eId)
+        {
+            var employer = await _context.Employers.FindAsync(eId);
+            return View(employer);
+        }
+
+        [HttpGet]
         [Route("{userid}/apply/{jobid}")]
         public async Task<IActionResult> ApplyJob([FromRoute] string jobid)
         {
@@ -193,6 +201,7 @@ namespace DoanWebsiteTuyenDung.Controllers
             }
             return NotFound();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
