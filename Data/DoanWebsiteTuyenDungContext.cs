@@ -34,7 +34,7 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
     {
         modelBuilder.Entity<Application>(entity =>
         {
-            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D92DCF8CDA");
+            entity.HasKey(e => e.AId).HasName("PK__Applicat__71AD61D9D1D5E3C7");
 
             entity.Property(e => e.AAppliedDate).HasDefaultValueSql("(getdate())");
 
@@ -45,12 +45,12 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
         modelBuilder.Entity<Employer>(entity =>
         {
-            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DACE95C066C");
+            entity.HasKey(e => e.EId).HasName("PK__Employer__D7E94DAC78B904F8");
         });
 
         modelBuilder.Entity<Job>(entity =>
         {
-            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2ABA357A562");
+            entity.HasKey(e => e.JId).HasName("PK__Job__92B5B2AB24CE12B4");
 
             entity.Property(e => e.JPostDate).HasDefaultValueSql("(getdate())");
 
@@ -61,12 +61,12 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
 
         modelBuilder.Entity<JobSeeker>(entity =>
         {
-            entity.HasKey(e => e.JsId).HasName("PK__Job_Seek__D295F845C188D580");
+            entity.HasKey(e => e.JsId).HasName("PK__Job_Seek__D295F84554331656");
         });
 
         modelBuilder.Entity<Resume>(entity =>
         {
-            entity.HasKey(e => e.RId).HasName("PK__Resume__DE142AC1D2D24E8C");
+            entity.HasKey(e => e.RId).HasName("PK__Resume__DE142AC127215754");
 
             entity.Property(e => e.RUpdateDate).HasDefaultValueSql("(getdate())");
 
@@ -87,7 +87,7 @@ public partial class DoanWebsiteTuyenDungContext : DbContext
                         .HasConstraintName("FK_Intermediate"),
                     j =>
                     {
-                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC1330C092");
+                        j.HasKey("RId", "AId").HasName("PK__Intermed__590EFCDC2ABD5707");
                         j.ToTable("Intermediate_table");
                         j.IndexerProperty<string>("RId")
                             .HasMaxLength(30)

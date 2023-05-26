@@ -23,8 +23,15 @@ public partial class Resume
     public DateTime RUpdateDate { get; set; }
 
     [Column("R_content")]
-    [StringLength(100)]
     public string RContent { get; set; } = null!;
+
+    [Column("R_fileName")]
+    [StringLength(255)]
+    public string RFileName { get; set; } = null!;
+
+    [Column("R_filePath")]
+    [StringLength(255)]
+    public string RFilePath { get; set; } = null!;
 
     [Column("JS_id")]
     [StringLength(30)]
