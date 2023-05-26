@@ -55,6 +55,8 @@ create table Resume(
 	R_name nvarchar(30) not null,
 	R_updateDate date default(GETDATE()) not null,
 	R_content nvarchar(MAX) not null,
+	R_fileName nvarchar(255) NOT NULL,
+    R_filePath nvarchar(255) NOT NULL,
 	JS_id varchar(30) not null 
 	CONSTRAINT FK_Resume 
 			FOREIGN KEY (JS_id) REFERENCES Job_Seeker(JS_id)
