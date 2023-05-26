@@ -10,10 +10,12 @@ namespace DoanWebsiteTuyenDung.Controllers
     {
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly DoanWebsiteTuyenDungContext _context;
-        public JobSeekerDashboardController(DoanWebsiteTuyenDungContext context, IHttpContextAccessor httpContextAccessor)
+        private readonly Microsoft.AspNetCore.Hosting.IWebHostEnvironment _hostingEnvironment;
+        public JobSeekerDashboardController(DoanWebsiteTuyenDungContext context, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
             _contextAccessor = httpContextAccessor;
+            _hostingEnvironment = hostingEnvironment;
         }
         [Route("{userid}/dashboard")]
         public async Task<IActionResult> Index()
@@ -62,7 +64,7 @@ namespace DoanWebsiteTuyenDung.Controllers
             }
             else
             {
-                return View("Index", jobseeker);
+                return RedirectToAction("Index", new { userid = userid });
             }
         }
         [Route("{userid}/resumes")]
@@ -77,7 +79,7 @@ namespace DoanWebsiteTuyenDung.Controllers
         }
 
         [HttpGet]
-        [Route("{userid}/resume{reId}")]
+        [Route("{userid}/resume/{reId}")]
         public IActionResult GetResumeDetail(string reId)
         {
             var re = _context.Resumes.Include(r => r.Js).FirstOrDefault(r => r.RId == reId);
@@ -108,6 +110,21 @@ namespace DoanWebsiteTuyenDung.Controllers
         {
             string userid = _contextAccessor.HttpContext.Session.GetString("userId");
             string content = Request.Form["quillContent"];
+            var file = Request.Form.Files["file"];
+
+            // Tạo thư mục nếu nó chưa tồn tại
+            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "resumes");
+            Directory.CreateDirectory(uploadFolder);
+
+            // Lưu tệp được tải lên vào thư mục
+            var filePath = Path.Combine(uploadFolder, file.FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            var serverPath = "/resumes/" + file.FileName;
+
             string Id;
             var lastRecord = await _context.Resumes.OrderByDescending(r => r.RId).FirstOrDefaultAsync();
             if (lastRecord == null)
@@ -141,6 +158,8 @@ namespace DoanWebsiteTuyenDung.Controllers
             resume.RId = newId;
             resume.RContent = content;
             resume.JsId = userid;
+            resume.RFilePath = serverPath;
+            resume.RFileName = file.FileName;
 
             TempData["success"] = "Tạo sơ yếu lý lịch thành công";
             await _context.AddAsync(resume);
@@ -177,7 +196,7 @@ namespace DoanWebsiteTuyenDung.Controllers
                 .Include(r => r.Js)
                 .Where(r => r.Js.JsId == userid)
                 .ToList();
-            return View("Resumes", res);
+            return RedirectToAction("Resumes", new { userid = userid });
         }
 
         [HttpGet]
@@ -209,7 +228,7 @@ namespace DoanWebsiteTuyenDung.Controllers
                 .Include(r => r.Js)
                 .Where(r => r.Js.JsId == userid)
                 .ToList();
-            return View("Resumes", res);
+            return RedirectToAction("Resumes", new { userid = userid });
         }
 
         [HttpGet]

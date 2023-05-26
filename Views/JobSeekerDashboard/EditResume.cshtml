@@ -36,7 +36,23 @@
                             <input type="hidden" name="quillContent" id="quillContent">
                         </div>
 
-                        <input class="btn" id="my-btn" type="submit" value="Sửa tin">
+                        <div class="form-group">
+                            <label for="file-name">Tên file CV</label>
+                            <input type="text" name="file-name" class="form-control" value="@Model.RFileName" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file-path">File CV</label>
+                            <input type="text" name="file-path" class="form-control" value="@Model.RFilePath" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file">Tải lại CV</label>
+                            <input type="file" name="file" />
+                        </div>
+
+                        <button asp-controller="JobSeekerDashboard" asp-action="Resumes" asp-route-userid="@userid" class="btn" id="my-btn">Quay lại trang</button>
+                        <input class="btn" id="my-btn" type="submit" value="Sửa hồ sơ">
                     </form>
                 </div>
             </div>
