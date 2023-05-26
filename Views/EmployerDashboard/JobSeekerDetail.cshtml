@@ -1,21 +1,25 @@
-﻿@model DoanWebsiteTuyenDung.Models.Employer
+﻿@model DoanWebsiteTuyenDung.Models.JobSeeker
 @{
     Layout = "_DashboardLayout.cshtml";
 }
+@{
+    var resume = (Resume)ViewData["Resume"];
+}
 <section>
     <div id="dashboard-content-main-inner">
+        <h1>Thông tin ứng viên @Model.JsName</h1>
         <div class="card">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-7">
                         <div class="d-md-flex align-items-center">
                             <div class="text-center text-sm-left ">
-                                <div class="p-2 avatar avatar-image" style="width: 150px; height:150px">
-                                    <img src=@(Model.EImage != null ? Model.EImage : "") alt="avatar" style="width:100%; height:100%; object-fit:contain">
+                                <div class="avatar avatar-image" style="width: 150px; height:150px">
+                                    <img src=@(Model.JsImage != null ? Model.JsImage : "") alt="avatar">
                                 </div>
                             </div>
                             <div class="text-center text-sm-left m-v-15 p-l-30">
-                                <h2 class="m-b-5">@Model.EName</h2>
+                                <h2 class="m-b-5">@Model.JsName</h2>
                             </div>
                         </div>
                     </div>
@@ -29,7 +33,7 @@
                                             <i class="m-r-10 text-primary anticon anticon-mail"></i>
                                             <span>Email: </span>
                                         </p>
-                                        <p class="col font-weight-semibold"> @Model.EEmail</p>
+                                        <p class="col font-weight-semibold"> @Model.JsEmail</p>
                                     </li>
                                     <li class="row">
                                         <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
@@ -37,7 +41,7 @@
                                             <span>Liên lạc: </span>
                                         </p>
                                         <p class="col font-weight-semibold">
-                                            @(Model.EPhone != null ? Model.EPhone : "Chưa cập nhật")
+                                            @(Model.JsPhone != null ? Model.JsPhone : "Chưa cập nhật")
                                         </p>
                                     </li>
                                     <li class="row">
@@ -45,7 +49,7 @@
                                             <i class="m-r-10 text-primary anticon anticon-compass"></i>
                                             <span>Địa chỉ: </span>
                                         </p>
-                                        <p class="col font-weight-semibold"> @(Model.EAddress != null ? @Model.EAddress : "Chưa cập nhật")</p>
+                                        <p class="col font-weight-semibold"> @(Model.JsAddress != null ? @Model.JsAddress : "Chưa cập nhật")</p>
                                     </li>
                                 </ul>
                             </div>
@@ -55,11 +59,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5>Giới thiệu</h5>
-                        <p>@Html.Raw(Model.EAbout)</p>
+                        <h5>Kỹ năng chung</h5>
+                        <p>@Html.Raw(Model.JsSkills)</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Thông tin sơ yếu lý lịch</h5>
+                        <p>@Html.Raw(resume.RContent)</p>
                         <hr>
                     </div>
                 </div>

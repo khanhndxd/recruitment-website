@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/assetsAdmin/css/app.min.css">
 		<link rel="stylesheet" href="~/assets/css/quill.snow.css">
-
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	</head>
 	<body id="my-body">
 	<partial name="_Notification" />
@@ -64,11 +64,9 @@
 			<div id="dashboard-content-main">@RenderBody()</div>
 		</div>
 	</body>
-	<script src="~/assets/js/bootstrap.bundle.min.js"></script>
-	<script src="~/assetsAdmin/js/pages/project-list.js"></script>
-	<script src="~/assetsAdmin/js/app.min.js"></script>
-	<script src="~/assetsAdmin/js/vendors.min.js"></script>
-	<script src="~/assets/js/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="~/assetsAdmin/js/vendors.min.js"></script>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assetsAdmin/js/pages/project-list.js"></script>
+<script src="~/assetsAdmin/js/app.min.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 </html>

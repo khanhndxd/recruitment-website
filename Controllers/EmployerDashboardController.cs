@@ -1,4 +1,5 @@
 ﻿using DoanWebsiteTuyenDung.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -81,7 +82,10 @@ namespace DoanWebsiteTuyenDung.Controllers
                 .Include(j => j.EIdNavigation)
                 .Where(j => j.EIdNavigation.EId == userid)
                 .ToList();
-            return View("Jobs", jobs);
+            return RedirectToAction("Jobs", new
+            {
+                userid = userid
+            });
         }
 
         [HttpGet]
@@ -116,8 +120,11 @@ namespace DoanWebsiteTuyenDung.Controllers
 			}
 			else
 			{
-				return View("Index", employer);
-			}
+                return RedirectToAction("Index", new
+                {
+                    userid = userid
+                });
+            }
 		}
 
 
@@ -153,8 +160,42 @@ namespace DoanWebsiteTuyenDung.Controllers
             }
             else
             {
-                return View("Index", employer);
+                return RedirectToAction("Index", new
+                {
+                    userid = userid
+                });
             }
+        }
+
+        [HttpGet]
+        [Route("{userid}/dashboard/{jobId}/jobseekers")]
+        public async Task<IActionResult> GetJobSeeker([FromRoute] string jobId)
+        {
+            var job = await _context.Jobs.FindAsync(jobId);
+            ViewData["jobTitle"] = job.JTitle;
+            ViewData["jobId"] = jobId;
+
+            var jobSeekers = _context.Applications
+                .Where(a => a.JId == jobId)
+                .SelectMany(a => a.RIds.Select(r => r.Js))
+                .Distinct()
+                .ToList();
+            return View(jobSeekers);
+        }
+
+        [HttpGet]
+        [Route("{userid}/dashboard/{jobId}/jobseekers/{jsId}/detail")]
+        public async Task<IActionResult> JobSeekerDetail([FromRoute] string jsId, [FromRoute] string jobId)
+        {
+            var resume = _context.Applications
+                .Where(a => a.JId == jobId && a.RIds.Any(r => r.JsId == jsId))
+                .SelectMany(a => a.RIds)
+                .Distinct()
+                .FirstOrDefault();
+
+            ViewData["Resume"] = resume;
+            var jobSeeker = await _context.JobSeekers.FindAsync(jsId);
+            return View(jobSeeker);
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿@model List<JobSeeker>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
+}
+@{
+    Layout = "_DashboardLayout.cshtml";
+}
+<div class="main-content">
+    <div class="container-fluid">
+        <h2>Danh sách ứng viên của công việc @ViewData["jobTitle"]</h2>
+        <div class="card d-flex" id="list-view">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th>Email</th>
+                            <th>Điện thoại</th>
+                            <th>Địa chỉ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var jobSeeker in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="media align-items-center">
+                                        <div class="m-l-10">
+                                            <h5 class="m-b-0">@jobSeeker.JsName</h5>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span>@jobSeeker.JsEmail</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span>@(jobSeeker.JsPhone != null ? jobSeeker.JsPhone : "Không có" )</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span>@(jobSeeker.JsAddress != null ? jobSeeker.JsAddress : "Không có")</span>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-animated scale-left">
+                                        <a class="btn btn-primary" asp-controller="EmployerDashboard" asp-action="JobSeekerDetail" asp-route-userid="@userid" asp-route-jobId="@ViewData["jobId"]" asp-route-jsId="@jobSeeker.JsId">
+                                            <span>Xem thông tin</span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
