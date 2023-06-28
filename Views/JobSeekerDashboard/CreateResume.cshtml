@@ -4,50 +4,46 @@
 @{
     string userid = HttpContextAccessor.HttpContext.Session.GetString("userId");
 }
-<html>
-    <head>
-        <link rel="stylesheet" href="~/assets/css/quill.snow.css">
-    </head>
-    <body>
-        <section class="site-section">
-            <div class="container">
+@{
+    Layout = "_DashboardLayout.cshtml";
+}
+<section class="site-section">
+    <div class="container">
 
-                <div class="row align-items-center mb-5">
-                    <div class="col-lg-8 mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center">
-                            <div>
-                                <h2>Tạo sơ yếu lý lịch</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-lg-12">
-                    <form enctype="multipart/form-data" asp-asp-controller="JobSeekerDashboard" asp-action="CreateResume" asp-route-userid="@userid" class="p-4 p-md-5 border rounded" method="post">
-                            <h3 class="text-black mb-5 border-bottom pb-2">Thông tin công việc</h3>
-
-                            <div class="form-group">
-                                <label asp-for="RName">Tên sơ yếu lý lịch</label>
-                                <input asp-for="RName" type="text" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="JDescription">Nội dung</label>
-                                <div id="quillEditor"></div>
-                                <input type="hidden" name="quillContent" id="quillContent">
-                            </div>
-                            <div class="form-group">
-                                <label for="file">Tải CV</label>
-                                <input type="file" name="file" />
-                            </div>
-
-                            <input class="btn" id="my-btn" type="submit" value="Tạo">
-                        </form>
+        <div class="row align-items-center mb-2">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h2>Tạo sơ yếu lý lịch</h2>
                     </div>
                 </div>
             </div>
-        </section>
-    </body>
-</html>
+        </div>
+        <div class="row mb-5" style="background-color:#fff;">
+            <div class="col-lg-12 p-0">
+            <form enctype="multipart/form-data" asp-asp-controller="JobSeekerDashboard" asp-action="CreateResume" asp-route-userid="@userid" class="p-4 p-md-5 border rounded" method="post">
+                    <h3 class="text-black mb-5 border-bottom pb-2">Thông tin công việc</h3>
+
+                    <div class="form-group">
+                        <label asp-for="RName">Tên sơ yếu lý lịch</label>
+                        <input asp-for="RName" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="JDescription">Nội dung</label>
+                        <div id="quillEditor"></div>
+                        <input type="hidden" name="quillContent" id="quillContent">
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Tải CV</label>
+                        <input type="file" name="file" />
+                    </div>
+
+                    <input class="btn" id="my-btn" type="submit" value="Tạo">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 @section Scripts {
     <script src="~/assets/js/quill.min.js"></script>

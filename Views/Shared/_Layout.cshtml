@@ -49,7 +49,68 @@
             <div class="site-mobile-menu-body"></div>
         </div> <!-- .site-mobile-menu -->
         <!-- NAVBAR -->
-        <header class="site-navbar mt-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#F0F8FF!important;">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home" asp-area=""><span class="text-black">KHANH-PHU-DAI</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-area="" asp-controller="Home" class="nav-link active text-black">Trang chủ</a>
+                        </li>
+                        @if (username != null)
+                        {
+                            if (usertype == "emp")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="EmployerDashboard" asp-action="Index" asp-route-userid="@userId">Quản lý</a>
+                                </li>
+                            }
+                            else if (usertype == "jsk")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="JobSeekerDashboard" asp-action="Index" asp-route-userid="@userId">Quản lý</a>
+                                </li>
+                            }
+
+                        }
+                    </ul>
+                    @if(username == null)
+                    {
+                        <div class="row">
+                            <div class="dropdown mr-4 dropleft">
+                                <button class="dropdown-toggle btn my-btn-2" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Đăng nhập
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <a class="dropdown-item" asp-action="JobSeeker" asp-area="" asp-controller="Signin">Người tìm việc</a>
+                                    <a class="dropdown-item" asp-action="Employer" asp-area="" asp-controller="Signin">Nhà tuyển dụng</a>
+                                </div>
+                            </div>
+                            <div class="dropdown dropleft">
+                                <button class="dropdown-toggle btn my-btn-2" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Đăng ký
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                    <a class="dropdown-item" asp-action="JobSeeker" asp-area="" asp-controller="Signup">Người tìm việc</a>
+                                    <a class="dropdown-item" asp-action="Employer" asp-area="" asp-controller="Signup">Nhà tuyển dụng</a>
+                                </div>
+                            </div>
+                        </div>
+                    } else
+                    {
+                        if (usertype == "emp")
+                        {
+                            <div id="my-btn" style="padding: 6px !important;" class="btn btn-primary border-width-2 d-none d-lg-inline-block mr-4"><a style="color: white;text-decoration: none;" asp-action="PostJob" asp-area="" asp-controller="Home">Đăng công việc</a></div>
+                        }
+                        <div id="my-btn" style="padding: 6px !important;" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><a style="color: white;text-decoration: none;" asp-action="Index" asp-area="" asp-controller="Signout">Đăng xuất</a></div>
+                    }
+                </div>
+            </div>
+        </nav>
+        @*<header class="site-navbar mt-3" >
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="site-logo col-6"><a asp-action="Index" asp-controller="Home" asp-area=""><span class="text-black">Khanh-Phu-Dai</span></a></div>
@@ -68,7 +129,6 @@
                                 }
 
                             }
-                            <li><a href="#" class="text-black">Liên hệ</a></li>
                         </ul>
                     </nav>
 
@@ -124,8 +184,7 @@
 
                 </div>
             </div>
-        </header>
-
+        </header>*@
         <!-- HOME -->
         @RenderBody()
 

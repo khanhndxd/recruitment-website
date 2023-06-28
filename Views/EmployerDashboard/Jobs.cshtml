@@ -9,11 +9,11 @@
 }
 
 <div class="main-content">
-    <div class="page-header no-gutters mb-3">
-        <div class="row align-items-md-center">
+    <div class="page-header no-gutters mb-3 d-flex">
+        <div class="row">
             <div class="col-md-6">
                 <div class="text-md-right m-v-10">
-                    <a class="btn btn-primary" asp-controller="Home" asp-action="PostJob">
+                    <a class="btn btn-primary" asp-controller="EmployerDashboard" asp-action="PostJobDashboard" asp-route-userid="@userid">
                         <i class="anticon anticon-plus"></i>
                         <span class="m-l-5">Đăng tin tuyển dụng</span>
                     </a>
@@ -55,10 +55,13 @@
                                                 <i class="anticon anticon-edit"></i>
                                                 <span class="m-l-10">Sửa</span>
                                             </a>
-                                            <a class="dropdown-item" asp-controller="EmployerDashboard" asp-action="DeleteJob" asp-route-userid="@userid" asp-route-jobId=@job.JId>
-                                                <i class="anticon anticon-delete"></i>
-                                                <span class="m-l-10">Xóa</span>
-                                            </a>
+                                            @if (job.JStatus == 0)
+                                            {
+                                                <a class="dropdown-item" asp-controller="EmployerDashboard" asp-action="DeleteJob" asp-route-userid="@userid" asp-route-jobId=@job.JId>
+                                                    <i class="anticon anticon-delete"></i>
+                                                    <span class="m-l-10">Xóa</span>
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>

@@ -112,61 +112,68 @@ namespace DoanWebsiteTuyenDung.Controllers
             string content = Request.Form["quillContent"];
             var file = Request.Form.Files["file"];
 
-            // Tạo thư mục nếu nó chưa tồn tại
-            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "resumes");
-            Directory.CreateDirectory(uploadFolder);
+            if(file == null)
+            {
+                TempData["error"] = "Chưa chọn file";
+                return View();
+            } else
+            {
+                // Tạo thư mục nếu nó chưa tồn tại
+                var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "resumes");
+                Directory.CreateDirectory(uploadFolder);
 
-            // Lưu tệp được tải lên vào thư mục
-            var filePath = Path.Combine(uploadFolder, file.FileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+                // Lưu tệp được tải lên vào thư mục
+                var filePath = Path.Combine(uploadFolder, file.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
 
-            var serverPath = "/resumes/" + file.FileName;
+                var serverPath = "/resumes/" + file.FileName;
 
-            string Id;
-            var lastRecord = await _context.Resumes.OrderByDescending(r => r.RId).FirstOrDefaultAsync();
-            if (lastRecord == null)
-            {
-                Id = "";
-            }
-            else
-            {
-                Id = lastRecord.RId;
-            }
-            int nextId;
-            string currentId = String.Join("", Id.Where(char.IsDigit));
-            if (currentId == "")
-            {
-                nextId = 1;
-            }
-            else
-            {
-                nextId = Int32.Parse(currentId) + 1;
-            }
-            string newId;
-            if (nextId <= 9)
-            {
-                newId = "re0" + nextId.ToString();
-            }
-            else
-            {
-                newId = "re" + nextId.ToString();
-            }
+                string Id;
+                var lastRecord = await _context.Resumes.OrderByDescending(r => r.RId).FirstOrDefaultAsync();
+                if (lastRecord == null)
+                {
+                    Id = "";
+                }
+                else
+                {
+                    Id = lastRecord.RId;
+                }
+                int nextId;
+                string currentId = String.Join("", Id.Where(char.IsDigit));
+                if (currentId == "")
+                {
+                    nextId = 1;
+                }
+                else
+                {
+                    nextId = Int32.Parse(currentId) + 1;
+                }
+                string newId;
+                if (nextId <= 9)
+                {
+                    newId = "re0" + nextId.ToString();
+                }
+                else
+                {
+                    newId = "re" + nextId.ToString();
+                }
 
-            resume.RId = newId;
-            resume.RContent = content;
-            resume.JsId = userid;
-            resume.RFilePath = serverPath;
-            resume.RFileName = file.FileName;
+                resume.RId = newId;
+                resume.RContent = content;
+                resume.JsId = userid;
+                resume.RFilePath = serverPath;
+                resume.RFileName = file.FileName;
 
-            TempData["success"] = "Tạo sơ yếu lý lịch thành công";
-            await _context.AddAsync(resume);
-            await _context.SaveChangesAsync();
+                TempData["success"] = "Tạo sơ yếu lý lịch thành công";
+                await _context.AddAsync(resume);
+                await _context.SaveChangesAsync();
 
-            var jobseeker = await _context.JobSeekers.FindAsync(userid);
-            return View("Index", jobseeker);
+                var jobseeker = await _context.JobSeekers.FindAsync(userid);
+                return View("Index", jobseeker);
+            }
         }
 
         [HttpGet]
@@ -219,6 +226,8 @@ namespace DoanWebsiteTuyenDung.Controllers
             var re = await _context.Resumes.FindAsync(reId);
             if (re != null)
             {
+                _context.Applications.RemoveRange(re.AIds);
+
                 _context.Resumes.Remove(re);
                 await _context.SaveChangesAsync();
             }

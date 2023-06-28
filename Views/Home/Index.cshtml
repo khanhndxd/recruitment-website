@@ -3,7 +3,7 @@
     ViewData["Title"] = "Trang chủ";
 }
 <title>@ViewData["Title"]</title>
-<section class="home-section section-hero inner-page" id="home-section" style="background-color:#F0F8FF">
+<section class="home-section section-hero inner-page pt-0" id="home-section" style="background-color:#F0F8FF">
 
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -15,13 +15,13 @@
                 <form id="searchForm" method="get" class="search-jobs-form" asp-controller="Home" asp-action="Search">
                     <div class="row mb-5">
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <input id="name" name="name" type="text" class="form-control form-control-lg" placeholder="Tên công việc, công ty...">
+                            <input id="name" name="name" type="text" class="form-control form-control-lg" placeholder="Tên công việc">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                             <input id="job-location" name="job-location" type="text" class="form-control form-control-lg" placeholder="Thành phố">
                         </div>
                         <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <select id="job-type" name="job-type" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Chọn kiểu công việc">
+                            <select id="job-type" name="job-type" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" title="Chọn kiểu công việc">
                                 <option value="P">Part Time</option>
                                 <option value="F">Full Time</option>
                             </select>
@@ -63,10 +63,10 @@
         <ul class="job-listings mb-5">
             @foreach(var job in Model)
             {
-                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center mb-3">
+                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center mb-3" id="my-li">
                     <a asp-controller="Home" asp-action="GetJobDetail" asp-route-jobId=@job.JId></a>
-                    <div class="p-3 job-listing-logo">
-                        <img src=@job.EIdNavigation.EImage alt="company-logo" class="img-fluid" style="width:100%; height:100%; object-fit:contain">
+                    <div class="p-3 job-listing-logo" id="my-li" style="width:120px; height:120px; display:flex; align-items:center; justify-content:center">
+                        <img src=@job.EIdNavigation.EImage alt="company-logo" class="img-fluid" style="width:auto; height:100%; object-fit:contain">
                     </div>
 
                     <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">

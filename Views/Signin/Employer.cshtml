@@ -2,8 +2,9 @@
 @{
     ViewData["Title"] = "Đăng nhập - Nhà tuyển dụng";
 }
+
 <title>@ViewData["Title"]</title>
-<section class="section-hero inner-page" id="home-section" style="background-color:#F0F8FF">
+<section class="section-hero inner-page pt-0" id="home-section" style="background-color:#F0F8FF">
     <div class="container">
         <div class="row">
             <div class="col-md-7">
@@ -15,18 +16,18 @@
 
 <section class="site-section" style="padding-top:3rem; padding-bottom:3rem">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 mb-5">
+        <div class="row" style="align-items:center; justify-content:center;">
+            <div class="col-lg-6 mb-5">
                 <form asp-action="Employer" class="p-4 border rounded">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="EEmail" class="text-black">Email</label>
-                        <input type="email" asp-for="EEmail" class="form-control" placeholder="Địa chỉ email" />
+                        <input type="email" asp-for="EEmail" class="form-control" id="my-input" placeholder="Địa chỉ email" />
                         <span asp-validation-for="EEmail" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EPassword" class="text-black">Mật khẩu</label>
-                        <input type="password" asp-for="EPassword" class="form-control" placeholder="Mật khẩu" />
+                        <input type="password" asp-for="EPassword" class="form-control" id="my-input" placeholder="Mật khẩu" />
                         <span asp-validation-for="EPassword" class="text-danger"></span>
                     </div>
                     <div class="form-group">

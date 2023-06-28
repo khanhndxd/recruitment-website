@@ -17,7 +17,7 @@
 	<partial name="_Notification" />
 		<div id="dashboard-header">
 			<div id="dashboard-header-logo">
-				<div class="site-logo"><a asp-action="Index" asp-controller="Home" asp-area=""><span class="text-black" id="dashboard-logo">Khanh-Phu-Dai</span></a></div>
+				<div class="site-logo"><a asp-action="Index" asp-controller="Home" asp-area=""><span class="text-black" id="dashboard-logo">KHANH-PHU-DAI</span></a></div>
 			</div>
 		</div>
 		<div id="dashboard-side-nav">
@@ -25,41 +25,51 @@
 			<div class="side-nav">
 				<div class="side-nav-inner">
 					<ul class="side-nav-menu scrollable">
-						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
-							<a asp-controller="JobSeekerDashboard" asp-action="Index" asp-route-userid="@userid" id="dashboard-link">
-								<span class="icon-holder">
+						<li class="nav-item dropdown my-list" style="margin:15px; margin-left:0px; margin-right:0px;">
+							<a style="text-align:center;" asp-controller="Home" asp-action="Index" id="dashboard-link">
+							@*	<span class="icon-holder">
 									<i class="anticon anticon-form"></i>
-								</span>
+								</span>*@
 								<span class="title">
 									Trang chủ
 								</span>
 							</a>
 						</li>
-						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
-							<a asp-controller="JobSeekerDashboard" asp-action="Resumes" asp-route-userid="@userid" id="dashboard-link">
-								<span class="icon-holder">
-									<i class="anticon anticon-appstore"></i>
+						<li class="nav-item dropdown my-list" style="margin:15px; margin-left:0px; margin-right:0px;">
+							<a style="text-align:center;" asp-controller="JobSeekerDashboard" asp-action="Index" asp-route-userid="@userid" id="dashboard-link">
+								@*<span class="icon-holder">
+									<i class="anticon anticon-form"></i>
+								</span>*@
+								<span class="title">
+									Thông tin
 								</span>
+							</a>
+						</li>
+						<li class="nav-item dropdown my-list" style="margin:15px; margin-left:0px; margin-right:0px;">
+							<a style="text-align:center;" asp-controller="JobSeekerDashboard" asp-action="Resumes" asp-route-userid="@userid" id="dashboard-link">
+								@*<span class="icon-holder">
+									<i class="anticon anticon-appstore"></i>
+								</span>*@
 								<span class="title">
 									Sơ yếu lý lịch
 								</span>
 							</a>
 						</li>
-						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
-							<a asp-controller="JobSeekerDashboard" asp-action="AppliedJob" asp-route-userid="@userid" id="dashboard-link">
-								<span class="icon-holder">
+						<li class="nav-item dropdown my-list" style="margin:15px; margin-left:0px; margin-right:0px;">
+							<a style="text-align:center;" asp-controller="JobSeekerDashboard" asp-action="AppliedJob" asp-route-userid="@userid" id="dashboard-link">
+								@*<span class="icon-holder">
 									<i class="anticon anticon-appstore"></i>
-								</span>
+								</span>*@
 								<span class="title">
 									Danh sách công việc
 								</span>
 							</a>
 						</li>
-						<li class="nav-item dropdown" style="margin:15px; margin-left:0px;">
-							<a asp-controller="JobSeekerDashboard" asp-action="UpdateJobSeekerInfo" asp-route-userid="@userid" id="dashboard-link">
-								<span class="icon-holder">
+						<li class="nav-item dropdown my-list" style="margin:15px; margin-left:0px; margin-right:0px;">
+							<a style="text-align:center;" asp-controller="JobSeekerDashboard" asp-action="UpdateJobSeekerInfo" asp-route-userid="@userid" id="dashboard-link">
+								@*<span class="icon-holder">
 									<i class="anticon anticon-dashboard"></i>
-								</span>
+								</span>*@
 								<span class="title">
 									Cập nhật thông tin
 								</span>

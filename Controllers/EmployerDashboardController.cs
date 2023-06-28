@@ -42,6 +42,74 @@ namespace DoanWebsiteTuyenDung.Controllers
             return View("Jobs", jobs);
         }
 
+        [Route("{userid}/dashboard/postjob")]
+        public IActionResult PostJobDashboard()
+        {
+            string usertype = _contextAccessor.HttpContext.Session.GetString("usertype");
+            string userid = _contextAccessor.HttpContext.Session.GetString("userId");
+            ViewData["userid"] = userid;
+            if (usertype == "emp")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("{userid}/dashboard/postjob")]
+        public async Task<IActionResult> PostJobDashboard(Job job)
+        {
+            string description = Request.Form["quillContent"];
+            string required = Request.Form["quillContent-2"];
+            int so_ngay_het_han = int.Parse(Request.Form["so-ngay-het-han"]);
+            string Id;
+            var lastRecord = await _context.Jobs.OrderByDescending(e => e.JId).FirstOrDefaultAsync();
+            if (lastRecord == null)
+            {
+                Id = "";
+            }
+            else
+            {
+                Id = lastRecord.JId;
+            }
+            int nextId;
+            string currentId = String.Join("", Id.Where(char.IsDigit));
+            if (currentId == "")
+            {
+                nextId = 1;
+            }
+            else
+            {
+                nextId = Int32.Parse(currentId) + 1;
+            }
+            string newId;
+            if (nextId <= 9)
+            {
+                newId = "job0" + nextId.ToString();
+            }
+            else
+            {
+                newId = "job" + nextId.ToString();
+            }
+
+            job.JId = newId;
+            job.JDescription = description;
+            job.JRequiredSkills = required;
+            job.EId = _contextAccessor.HttpContext.Session.GetString("userId");
+            job.JStatus = 0;
+            DateTime J_expirationDate = DateTime.Now.AddDays(so_ngay_het_han);
+            job.JExpirationDate = J_expirationDate;
+
+            await _context.AddAsync(job);
+            TempData["success"] = "Đăng tải công việc thành công";
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", new { userid = _contextAccessor.HttpContext.Session.GetString("userId") });
+        }
+
         [HttpGet]
         [Route("{userid}/dashboard/edit/{jobId}")]
         public async Task<IActionResult> EditJob(string jobId)

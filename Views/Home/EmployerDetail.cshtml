@@ -2,9 +2,9 @@
 @{
     Layout = "_JobDetailLayout.cshtml";
 }
-<section class="site-section">
+<section class="site-section p-5">
     <div class="container">
-        <h1>Thông tin nhà tuyển dụng</h1>
+        <h3>Thông tin nhà tuyển dụng</h3>
         <div id="dashboard-content-main-inner">
             <div class="card">
                 <div class="card-body">
@@ -13,7 +13,7 @@
                             <div class="d-md-flex align-items-center">
                                 <div class="text-center text-sm-left ">
                                     <div class="avatar avatar-image" style="width: 150px; height:150px">
-                                        <img src=@(Model.EImage != null ? Model.EImage : "") alt="avatar">
+                                        <img src=@(Model.EImage != null ? Model.EImage : "") alt="avatar" style="object-fit:contain; padding:15px;">
                                     </div>
                                 </div>
                                 <div class="text-center text-sm-left m-v-15 p-l-30">

@@ -1,0 +1,84 @@
+﻿@model DoanWebsiteTuyenDung.Models.Job
+@{
+    Layout = "_DashboardLayout.cshtml";
+}
+<section class="site-section p-5">
+    <div class="container">
+
+        <div class="row align-items-center mb-2">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="d-flex mr-auto">
+                    <div>
+                        <h2>Đăng tin tuyển dụng</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5" style="background-color:#fff;">
+            <div class="col-lg-12 p-0">
+                <form asp-action="PostJobDashboard" asp-route-userid=@ViewData["userid"] class="p-4 p-md-5 border rounded" method="post">
+                    <h3 class="text-black mb-5 border-bottom pb-2">Thông tin công việc</h3>
+
+                    <div class="form-group">
+                        <label asp-for="JTitle">Tiêu đề</label>
+                        <input asp-for="JTitle" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="JLocation">Địa chỉ</label>
+                        <input asp-for="JLocation" type="text" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="JSalary">Lương</label>
+                        <input asp-for="JSalary" type="number" class="form-control" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="so-ngay-het-han">Số ngày sẽ hết hạn tin đăng tuyển kể từ lúc tạo công việc</label>
+                        <input for="so-ngay-het-han" type="number" name="so-ngay-het-han" id="so-ngay-het-han" class="form-control" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="JType">Kiểu công việc</label>
+                        <select asp-for="JType" class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Chọn kiểu...">
+                            <option value="P">Part Time</option>
+                            <option value="F">Full Time</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="JDescription">Mô tả công việc</label>
+                        <div id="quillEditor"></div>
+                        <input type="hidden" name="quillContent" id="quillContent">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="JRequiredSkills">Yêu cầu</label>
+                        <div id="quillEditor-2"></div>
+                        <input type="hidden" name="quillContent-2" id="quillContent-2">
+                    </div>
+
+                    <input class="btn" id="my-btn" type="submit" value="Đăng công việc">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/assets/js/quill.min.js"></script>
+    <script type="text/javascript">
+        var quill = new Quill('#quillEditor', {
+            theme: 'snow'
+        });
+        var quill_2 = new Quill('#quillEditor-2', {
+            theme: 'snow'
+        });
+
+        document.querySelector('form').addEventListener('submit', function (event) {
+            var quillContent = quill.root.innerHTML;
+            var quillContent_2 = quill_2.root.innerHTML;
+            document.querySelector('#quillContent').value = quillContent;
+            document.querySelector('#quillContent-2').value = quillContent_2;
+        });
+    </script>
+}

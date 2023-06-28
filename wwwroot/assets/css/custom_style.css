@@ -1,10 +1,45 @@
-﻿#my-body {
+﻿.my-list {
+
+}
+.my-list:hover {
+    background-color: #1E90FF;
+    color:#fff;
+}
+
+#my-body {
     margin:0;
 }
 #my-btn {
     color: #fff;
     background-color: #1E90FF;
     border-color: #1E90FF;
+}
+#my-btn:hover {
+    color: #fff;
+    background-color: #1874CD;
+    border-color: #1874CD;
+}
+.my-btn-2 {
+    color: #fff;
+    background-color: #1E90FF;
+    border-color: #1E90FF;
+}
+.my-btn-2:hover {
+    color: #fff;
+    background-color: #1874CD;
+    border-color: #1874CD;
+}
+#my-input {
+}
+
+#my-input:focus {
+    border-color: #1E90FF !important;
+}
+#my-li {
+
+}
+#my-li:hover {
+    border-left: #1E90FF !important;
 }
 #dashboard-header {
     background: #fff;
