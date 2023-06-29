@@ -1,4 +1,4 @@
-﻿@model List<JobSeeker>
+﻿@model List<object>
 @using Microsoft.AspNetCore.Http;
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -19,12 +19,14 @@
                             <th>Email</th>
                             <th>Điện thoại</th>
                             <th>Địa chỉ</th>
-                            <th></th>
+                            <th>Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var jobSeeker in Model)
+                        @foreach (dynamic js in Model)
                         {
+                            var jobSeeker = js.JobSeeker;
+                            var resume = js.Resume;
                             <tr>
                                 <td>
                                     <div class="media align-items-center">
@@ -52,6 +54,15 @@
                                             <span>Xem thông tin</span>
                                         </a>
                                     </div>
+                                    @if (resume != null)
+                                    {
+                                        var resumePath = resume.RFilePath;
+                                        <div class="dropdown dropdown-animated scale-left">
+                                            <button class="btn btn-primary" onclick="openModal('@resumePath')">
+                                                <span>Xem CV</span>
+                                            </button>
+                                        </div>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -61,3 +72,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    function openModal(resumePath) {
+        window.open(resumePath);
+    }
+</script>

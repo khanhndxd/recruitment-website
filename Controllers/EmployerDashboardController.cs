@@ -243,12 +243,13 @@ namespace DoanWebsiteTuyenDung.Controllers
             ViewData["jobTitle"] = job.JTitle;
             ViewData["jobId"] = jobId;
 
-            var jobSeekers = _context.Applications
+            var jobSeekerResumeList = _context.Applications
                 .Where(a => a.JId == jobId)
-                .SelectMany(a => a.RIds.Select(r => r.Js))
-                .Distinct()
+                .Select(a => new { JobSeeker = a.RIds.Select(r => r.Js).FirstOrDefault(), Resume = a.RIds.FirstOrDefault() })
+                .Cast<object>()
                 .ToList();
-            return View(jobSeekers);
+
+            return View(jobSeekerResumeList);
         }
 
         [HttpGet]
