@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DoanWebsiteTuyenDungContext>(x => x.UseSqlServer("Data Source=NGUYENDUYKHANH1\\SQLEXPRESS;Initial Catalog=Doan_WebsiteTuyenDung;Trusted_Connection=yes;TrustServerCertificate=True;User ID=khanhnd;password=khanh123"));
+builder.Services.AddDbContext<DoanWebsiteTuyenDungContext>(x => x.UseSqlServer("Data Source=LAPTOP-OR9L1H31\\SQLEXPRESS;Initial Catalog=Doan_WebsiteTuyenDung;Trusted_Connection=yes;TrustServerCertificate=True;User ID=sa;password=123456789"));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
