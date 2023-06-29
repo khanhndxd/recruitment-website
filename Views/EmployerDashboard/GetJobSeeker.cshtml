@@ -19,6 +19,7 @@
                             <th>Email</th>
                             <th>Điện thoại</th>
                             <th>Địa chỉ</th>
+                            <th>Tên CV đã apply</th>
                             <th>Thao tác</th>
                         </tr>
                     </thead>
@@ -48,8 +49,17 @@
                                         <span>@(jobSeeker.JsAddress != null ? jobSeeker.JsAddress : "Không có")</span>
                                     </div>
                                 </td>
-                                <td class="text-right">
-                                    <div class="dropdown dropdown-animated scale-left">
+                                <td>
+                                    @if (resume != null)
+                                    {
+                                        var resumeName = resume.RFileName;
+                                        <div class="d-flex align-items-center">
+                                            <span>@resumeName</span>
+                                        </div>
+                                    }
+                                </td>
+                                <td class="">
+                                    <div class="dropdown dropdown-animated">
                                         <a class="btn btn-primary" asp-controller="EmployerDashboard" asp-action="JobSeekerDetail" asp-route-userid="@userid" asp-route-jobId="@ViewData["jobId"]" asp-route-jsId="@jobSeeker.JsId">
                                             <span>Xem thông tin</span>
                                         </a>
@@ -57,7 +67,7 @@
                                     @if (resume != null)
                                     {
                                         var resumePath = resume.RFilePath;
-                                        <div class="dropdown dropdown-animated scale-left">
+                                        <div class="dropdown dropdown-animated">
                                             <button class="btn btn-primary" onclick="openModal('@resumePath')">
                                                 <span>Xem CV</span>
                                             </button>
