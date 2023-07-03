@@ -1,2 +1,2 @@
 # recruitment-webiste
-Đồ án Công nghệ phần mềm
+Đồ án tổng hợp
